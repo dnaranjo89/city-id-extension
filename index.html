@@ -14,8 +14,12 @@
   </style>
 </head>
 
-<p>Video ID <code></code> <button>✖</button></p>
-<input class="form-control" size="50" placeholder="Paste in a Youtube URL" />
+<p>City <code></code></p>
+<input
+  class="form-control"
+  size="50"
+  placeholder="Paste in the URL of the holiday page to customize"
+/>
 
 <script>
   var cfExt = window.contentfulExtension || window.contentfulWidget;
@@ -33,12 +37,16 @@
     });
 
     $("input").on("input", function(ev) {
-      var match = ev.target.value.match(/youtube\.com\/watch\?v=([\w_-]+)/);
+      var match = ev.target.value.match(/\/cia-([0-9]+)/);
 
       if (match) {
+        var cityId = match[1];
+        var cityName = cities[cityId];
         api.field.setValue(match[1]);
-        $code.text(match[1]);
+        $code.text(cityName);
       }
     });
   });
+
+  var cities = { "27545236": "Porto", "27546111": "Singapore" };
 </script>
